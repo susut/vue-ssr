@@ -6,15 +6,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   asyncData({ store, route }) {
     return store.dispatch('fetchItem')
   },
   computed: {
     items() {
-      console.log(this.$store.state)
+      console.log(this.$store.state.items)
       return this.$store.state.items
     }
+  },
+  beforeMount() {
+    this.fetchItem()
+  },
+  methods: {
+    ...mapActions(['fetchItem'])
   }
 }
 </script>
